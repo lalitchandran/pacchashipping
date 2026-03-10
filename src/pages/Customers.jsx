@@ -40,7 +40,7 @@ const Customers = () => {
     };
 
     return (
-        <div className="w-full min-h-screen pt-32 pb-20 overflow-hidden relative bg-background">
+        <div className="w-full min-h-screen pt-32 pb-20 overflow-hidden relative bg-[#050a07]">
             {/* Background elements */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
                 <div className="absolute top-[20%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-brand-primary/10 blur-[100px] opacity-60"></div>
@@ -55,10 +55,10 @@ const Customers = () => {
                 className="max-w-[1400px] mx-auto px-6 text-center mb-20 relative z-10"
             >
                 <span className="text-brand-highlight tracking-widest uppercase text-sm font-bold mb-4 block">Enterprise Ecosystem</span>
-                <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-bold text-foreground mb-6 tracking-tight leading-tight">
+                <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-bold text-white mb-6 tracking-tight leading-tight">
                     Global Scale.<br />Trusted Integrity.
                 </h1>
-                <p className="max-w-3xl mx-auto text-muted-foreground text-xl font-medium leading-relaxed">
+                <p className="max-w-3xl mx-auto text-gray-400 text-xl font-medium leading-relaxed">
                     Powering the resilient supply chains of industry titans across aerospace, energy, high-tech hardware, and global retail.
                 </p>
             </motion.div>
@@ -72,17 +72,17 @@ const Customers = () => {
                     className="w-full relative py-16 glass-panel border-y border-white/5 mb-24 overflow-hidden flex z-10 shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
                 >
                     <motion.div
-                        animate={{ x: ["0%", "-33.33333333%"] }}
-                        transition={{ ease: "linear", duration: 30, repeat: Infinity }}
-                        className="flex whitespace-nowrap gap-24 items-center px-10 w-max"
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{ ease: "linear", duration: Math.max(20, partners.length * 5), repeat: Infinity }}
+                        className="flex whitespace-nowrap gap-16 md:gap-32 items-center px-10 w-max"
                     >
-                        {/* Triple array to create perfect seamless loop */}
-                        {[...partners, ...partners, ...partners].map((partner, idx) => (
-                            <div key={idx} className="flex flex-col items-center justify-center font-bold text-3xl md:text-4xl text-muted-foreground/40 tracking-tight hover:text-foreground transition-all duration-500 cursor-default">
-                                {partner.logoUrl?.trim() ? (
+                        {/* 10 loops ensures even a single customer name will overfill any wide screen viewport before snapping */}
+                        {[...Array(10)].flatMap(() => partners).map((partner, idx) => (
+                            <div key={idx} className="flex flex-col items-center justify-center font-extrabold text-4xl md:text-5xl text-gray-500/80 tracking-tighter hover:text-white transition-all duration-500 cursor-default px-4">
+                                {partner.logoUrl && partner.logoUrl.trim() !== '' ? (
                                     <img src={partner.logoUrl} alt={partner.name} className="h-10 md:h-12 object-contain opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" />
                                 ) : (
-                                    partner.name
+                                    <span>{partner.name}</span>
                                 )}
                             </div>
                         ))}
@@ -100,10 +100,10 @@ const Customers = () => {
                     className="max-w-5xl mx-auto px-6 relative z-10 mb-10"
                 >
                     <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 flex justify-between z-20 px-2 md:-mx-8 pointer-events-none">
-                        <button onClick={prevTestimonial} className="w-16 h-16 rounded-full glass-panel border border-white/5 shadow-lg text-foreground flex items-center justify-center pointer-events-auto hover:bg-white/10 hover:scale-110 hover:shadow-neon-brand transition-all duration-300">
+                        <button onClick={prevTestimonial} className="w-16 h-16 rounded-full glass-panel border border-white/5 shadow-lg text-white flex items-center justify-center pointer-events-auto hover:bg-white/10 hover:scale-110 hover:shadow-neon-brand transition-all duration-300">
                             <FiChevronLeft className="text-3xl" />
                         </button>
-                        <button onClick={nextTestimonial} className="w-16 h-16 rounded-full glass-panel border border-white/5 shadow-lg text-foreground flex items-center justify-center pointer-events-auto hover:bg-white/10 hover:scale-110 hover:shadow-neon-brand transition-all duration-300">
+                        <button onClick={nextTestimonial} className="w-16 h-16 rounded-full glass-panel border border-white/5 shadow-lg text-white flex items-center justify-center pointer-events-auto hover:bg-white/10 hover:scale-110 hover:shadow-neon-brand transition-all duration-300">
                             <FiChevronRight className="text-3xl" />
                         </button>
                     </div>
@@ -121,12 +121,12 @@ const Customers = () => {
                                 <div className="flex gap-2 text-brand-secondary mb-10 text-2xl">
                                     {[...Array(5)].map((_, i) => <FiStar key={i} className="fill-current" />)}
                                 </div>
-                                <p className="text-3xl md:text-5xl font-bold tracking-tight leading-snug mb-12 text-foreground">
+                                <p className="text-3xl md:text-5xl font-bold tracking-tight leading-snug mb-12 text-white">
                                     "{testimonials[currentIndex]?.text}"
                                 </p>
                                 <div>
-                                    <h4 className="font-bold text-foreground text-lg md:text-xl tracking-tight">{testimonials[currentIndex]?.author}</h4>
-                                    <p className="text-sm md:text-base text-muted-foreground uppercase tracking-widest mt-2 font-semibold">{testimonials[currentIndex]?.role}</p>
+                                    <h4 className="font-bold text-white text-lg md:text-xl tracking-tight">{testimonials[currentIndex]?.author}</h4>
+                                    <p className="text-sm md:text-base text-gray-400 uppercase tracking-widest mt-2 font-semibold">{testimonials[currentIndex]?.role}</p>
                                 </div>
                             </motion.div>
                         </AnimatePresence>
