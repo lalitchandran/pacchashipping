@@ -1,0 +1,97 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FiPhone, FiMail, FiMapPin, FiLinkedin, FiFacebook, FiInstagram, FiGlobe } from 'react-icons/fi';
+
+const Footer = () => {
+    return (
+        <footer className="relative mt-20 pt-20 pb-10 bg-[#050a07] border-t border-brand-primary/30 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] z-20">
+            <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+
+                {/* Brand Info */}
+                <div className="col-span-1 md:col-span-1">
+                    <Link to="/" className="flex items-center gap-3 mb-6 group">
+                        <div className="text-brand-primary text-4xl group-hover:text-brand-highlight transition-colors drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon><line x1="12" y1="22" x2="12" y2="15.5"></line><polyline points="22 8.5 12 15.5 2 8.5"></polyline><polyline points="2 15.5 12 8.5 22 15.5"></polyline><line x1="12" y1="2" x2="12" y2="8.5"></line></svg>
+                        </div>
+                        <span className="font-bold text-2xl tracking-tighter text-white">
+                            PACCHA
+                        </span>
+                    </Link>
+                    <p className="text-gray-400 text-[15px] mb-8 max-w-xs leading-relaxed font-medium">
+                        Paccha Universal Shipping Line Private Limited. High Performance, Cargo Delivered with precision.
+                    </p>
+                    <div className="flex gap-4">
+                        <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-primary transition-colors duration-300">
+                            <FiFacebook />
+                        </a>
+                        <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-primary transition-colors duration-300">
+                            <FiInstagram />
+                        </a>
+                        <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-primary transition-colors duration-300">
+                            <FiLinkedin />
+                        </a>
+                    </div>
+                </div>
+
+                {/* Quick Links */}
+                <div>
+                    <h4 className="font-bold text-lg mb-6 text-white">Quick Links</h4>
+                    <ul className="flex flex-col gap-4 text-[15px] text-gray-400 font-medium">
+                        <li><Link to="/services" className="hover:text-white transition-colors">Services</Link></li>
+                        <li><Link to="/updates" className="hover:text-white transition-colors">Latest News</Link></li>
+                        <li><Link to="/customers" className="hover:text-white transition-colors">Customers</Link></li>
+                        <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+                        <li><Link to="/admin" className="hover:text-white transition-colors">Admin Panel</Link></li>
+                    </ul>
+                </div>
+
+                {/* Services */}
+                <div>
+                    <h4 className="font-bold text-lg mb-6 text-white">Services</h4>
+                    <ul className="flex flex-col gap-4 text-[15px] text-gray-400 font-medium">
+                        <li><Link to="/services/air" className="hover:text-white transition-colors">Air Freight</Link></li>
+                        <li><Link to="/services/ocean" className="hover:text-white transition-colors">Ocean Freight</Link></li>
+                        <li><Link to="/services/road" className="hover:text-white transition-colors">Road Transport</Link></li>
+                        <li><Link to="/services/warehousing" className="hover:text-white transition-colors">Warehousing</Link></li>
+                        <li><Link to="/services" className="hover:text-white transition-colors">Customs Clearance</Link></li>
+                    </ul>
+                </div>
+
+                {/* Contact info */}
+                <div>
+                    <h4 className="font-bold text-lg mb-6 text-white">Contact</h4>
+                    <ul className="flex flex-col gap-6 text-[15px] text-gray-400 font-medium">
+                        <li className="flex gap-4 items-start">
+                            <div className="mt-1 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-brand-highlight shrink-0">
+                                <FiMapPin />
+                            </div>
+                            <span>No.16, Dhanalakshmi Nagar, Kadappa Road, Puthagaram, Kolathur, Chennai - 600 099.</span>
+                        </li>
+                        <li className="flex gap-4 items-center">
+                            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-brand-highlight shrink-0">
+                                <FiPhone />
+                            </div>
+                            <span>+91 98413 93916 / +91 9345021647</span>
+                        </li>
+                        <li className="flex gap-4 items-center">
+                            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-brand-highlight shrink-0">
+                                <FiMail />
+                            </div>
+                            <span>lsasudhamani@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div className="max-w-[1400px] mx-auto px-6 border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-sm font-medium text-gray-500 gap-4">
+                <p>© {new Date().getFullYear()} Paccha Universal Shipping Line Pvt Ltd. All rights reserved.</p>
+                <div className="flex gap-8">
+                    <Link to="#" className="hover:text-white transition-colors">Privacy Policy</Link>
+                    <Link to="#" className="hover:text-white transition-colors">Terms of Service</Link>
+                </div>
+            </div>
+        </footer>
+    );
+};
+
+export default Footer;
