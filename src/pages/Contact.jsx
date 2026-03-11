@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiMapPin, FiPhone, FiMail, FiSend } from 'react-icons/fi';
 import { db } from '../firebase/config';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { sendContactEmail } from '../services/emailService';
+import { ref, push, serverTimestamp } from 'firebase/database';
 
 const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
@@ -18,15 +17,13 @@ const Contact = () => {
         setStatus('loading');
 
         try {
-            // 1. Save to Firestore
-            await addDoc(collection(db, 'queries'), {
+            // 1. Save to Realtime Database
+            const newQueryRef = push(ref(db, 'queries'));
+            await set(newQueryRef, {
                 ...formData,
                 status: 'New',
                 createdAt: serverTimestamp()
             });
-
-            // 2. Trigger EmailJS
-            await sendContactEmail(formData);
 
             setStatus('success');
             setFormData({ name: '', email: '', phone: '', message: '' });
@@ -44,7 +41,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="w-full min-h-screen pt-32 pb-20 px-6 max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-16 relative bg-transparent">
+        <div className="w-full min-h-screen pt-24 pb-12 px-4 md:pt-32 md:pb-20 md:px-6 max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16 relative bg-transparent">
 
             {/* Contact Info & Map */}
             <motion.div
@@ -52,19 +49,19 @@ const Contact = () => {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
                 variants={revealVariants}
-                className="flex-[1.2] flex flex-col gap-10 relative z-10"
+                className="flex-[1.2] flex flex-col gap-6 lg:gap-10 relative z-10"
             >
                 <div>
                     <span className="text-brand-highlight tracking-widest uppercase text-sm font-bold mb-4 block">Global Command Center</span>
-                    <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 lg:mb-6 tracking-tight leading-tight">
                         Initialize Partnership.
                     </h1>
-                    <p className="text-gray-400 text-xl leading-relaxed max-w-lg font-medium">
+                    <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-lg font-medium">
                         Engage with our enterprise architects to engineer the perfect global supply chain solution for your massive operations.
                     </p>
                 </div>
 
-                <div className="glass-panel-dark rounded-[2rem] p-10 flex flex-col gap-8 border border-white/5 shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:shadow-neon-brand hover:border-brand-primary/30 transition-shadow transition-all duration-500">
+                <div className="glass-panel-dark rounded-[2rem] p-6 md:p-10 flex flex-col gap-6 md:gap-8 border border-white/5 shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:shadow-neon-brand hover:border-brand-primary/30 transition-shadow transition-all duration-500">
                     <div className="flex gap-6 items-center group">
                         <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-brand-highlight text-2xl shrink-0 group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300">
                             <FiMapPin />
@@ -94,23 +91,23 @@ const Contact = () => {
                     </div>
                 </div>
 
-                {/* Map Container - Google Maps embed placeholder */}
-                <div className="w-full h-80 rounded-[2rem] overflow-hidden glass-panel-dark border border-white/5 p-2 relative group hover:shadow-neon-brand transition-all">
-                    <div className="absolute inset-0 z-10 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[2px] pointer-events-none">
-                        <span className="px-6 py-2 rounded-full bg-brand-primary text-white font-bold tracking-widest text-[11px] shadow-lg">Access Map Feed</span>
+                {/* Map Container - Link to Google Maps Directions */}
+                <a href="https://www.google.com/maps/dir/?api=1&destination=No.16,+Dhanalakshmi+Nagar,+Kadappa+Road,+Puthagaram,+Kolathur,+Chennai+-+600+099" target="_blank" rel="noopener noreferrer" className="hidden md:block w-full h-80 rounded-[2rem] overflow-hidden glass-panel-dark border border-white/5 p-2 relative group hover:shadow-neon-brand transition-all cursor-pointer">
+                    <div className="absolute inset-0 z-10 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[2px]">
+                        <span className="px-6 py-2 rounded-full bg-brand-primary text-white font-bold tracking-widest text-[11px] shadow-lg flex items-center gap-2">Get Directions <FiMapPin /></span>
                     </div>
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m2!1s0x3a52642ebda01511%3A0x6bba59bb9cc5dc70!2sKolathur%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                        src="https://maps.google.com/maps?q=No.16,+Dhanalakshmi+Nagar,+Kadappa+Road,+Puthagaram,+Kolathur,+Chennai+-+600+099&t=&z=15&ie=UTF8&iwloc=&output=embed"
                         width="100%"
                         height="100%"
-                        className="rounded-[1.5rem]"
+                        className="rounded-[1.5rem] pointer-events-none"
                         allowFullScreen=""
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                         title="Paccha HQ location"
                         style={{ filter: "invert(90%) hue-rotate(180deg) contrast(1.2)" }}
                     ></iframe>
-                </div>
+                </a>
             </motion.div>
 
             {/* Contact Form */}
@@ -124,10 +121,10 @@ const Contact = () => {
                 }}
                 className="flex-[1.4] relative z-10"
             >
-                <div className="glass-panel-dark rounded-[2.5rem] p-10 md:p-14 h-full flex flex-col justify-center shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/5">
-                    <h3 className="text-4xl font-bold mb-10 text-white tracking-tight">System Request Form</h3>
+                <div className="glass-panel-dark rounded-[2.5rem] p-6 md:p-14 h-full flex flex-col justify-center shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/5">
+                    <h3 className="text-3xl md:text-4xl font-bold mb-8 md:mb-10 text-white tracking-tight">System Request Form</h3>
 
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-5 md:gap-8">
                         <div className="flex flex-col gap-3 relative">
                             <label htmlFor="name" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Enterprise Representative</label>
                             <input
@@ -140,7 +137,7 @@ const Contact = () => {
                             />
                         </div>
 
-                        <div className="flex flex-col md:flex-row gap-8">
+                        <div className="flex flex-col gap-5 md:flex-row md:gap-8">
                             <div className="flex flex-col gap-3 flex-1 relative">
                                 <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Secure Email</label>
                                 <input

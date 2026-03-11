@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
 import { db } from '../firebase/config';
-import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { ref, onValue } from 'firebase/database';
 
 const Customers = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,13 +14,29 @@ const Customers = () => {
         let loaded = 0;
         const checkDone = () => { loaded++; if (loaded >= 2) setLoading(false); };
 
-        const unsubPartners = onSnapshot(query(collection(db, 'partners'), orderBy('createdAt', 'desc')), (snap) => {
-            setPartners(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        const partnersRef = ref(db, 'partners');
+        const unsubPartners = onValue(partnersRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                let partnersArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+                partnersArray.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                setPartners(partnersArray);
+            } else {
+                setPartners([]);
+            }
             checkDone();
         }, (err) => { console.error(err); checkDone(); });
 
-        const unsubTestimonials = onSnapshot(query(collection(db, 'testimonials'), orderBy('createdAt', 'desc')), (snap) => {
-            setTestimonials(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        const testimonialsRef = ref(db, 'testimonials');
+        const unsubTestimonials = onValue(testimonialsRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                let testimonialsArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+                testimonialsArray.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                setTestimonials(testimonialsArray);
+            } else {
+                setTestimonials([]);
+            }
             checkDone();
         }, (err) => { console.error(err); checkDone(); });
 
@@ -40,7 +56,7 @@ const Customers = () => {
     };
 
     return (
-        <div className="w-full min-h-screen pt-32 pb-20 overflow-hidden relative bg-[#050a07]">
+        <div className="w-full min-h-screen pt-24 md:pt-32 pb-12 md:pb-20 overflow-hidden relative bg-[#050a07]">
             {/* Background elements */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
                 <div className="absolute top-[20%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-brand-primary/10 blur-[100px] opacity-60"></div>
@@ -55,7 +71,7 @@ const Customers = () => {
                 className="max-w-[1400px] mx-auto px-6 text-center mb-20 relative z-10"
             >
                 <span className="text-brand-highlight tracking-widest uppercase text-sm font-bold mb-4 block">Enterprise Ecosystem</span>
-                <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-bold text-white mb-6 tracking-tight leading-tight">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
                     Global Scale.<br />Trusted Integrity.
                 </h1>
                 <p className="max-w-3xl mx-auto text-gray-400 text-xl font-medium leading-relaxed">
@@ -78,11 +94,13 @@ const Customers = () => {
                     >
                         {/* 10 loops ensures even a single customer name will overfill any wide screen viewport before snapping */}
                         {[...Array(10)].flatMap(() => partners).map((partner, idx) => (
-                            <div key={idx} className="flex flex-col items-center justify-center font-extrabold text-4xl md:text-5xl text-gray-500/80 tracking-tighter hover:text-white transition-all duration-500 cursor-default px-4">
+                            <div key={idx} className="flex flex-col items-center justify-center font-extrabold text-4xl md:text-5xl text-gray-500/80 tracking-tighter hover:text-white transition-all duration-500 cursor-default px-4 shrink-0">
                                 {partner.logoUrl && partner.logoUrl.trim() !== '' ? (
-                                    <img src={partner.logoUrl} alt={partner.name} className="h-10 md:h-12 object-contain opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0" />
+                                    <div className="bg-white/10 p-3 rounded-xl border border-white/5 shadow-sm hover:scale-110 transition-transform duration-300 flex items-center justify-center h-20 md:h-24 w-auto min-w-[80px]">
+                                        <img src={partner.logoUrl} alt={partner.name} className="h-full w-auto object-contain drop-shadow-md" />
+                                    </div>
                                 ) : (
-                                    <span>{partner.name}</span>
+                                    <span className="text-white hover:scale-105 transition-transform duration-300 drop-shadow-md shrink-0">{partner.name}</span>
                                 )}
                             </div>
                         ))}
@@ -108,7 +126,7 @@ const Customers = () => {
                         </button>
                     </div>
 
-                    <div className="glass-panel rounded-[2.5rem] p-10 md:p-20 text-center relative overflow-hidden min-h-[500px] flex items-center justify-center shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-white/5">
+                    <div className="glass-panel rounded-[2.5rem] p-6 md:p-20 text-center relative overflow-hidden min-h-[400px] md:min-h-[500px] flex items-center justify-center shadow-[0_12px_40px_rgba(0,0,0,0.5)] border border-white/5">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={currentIndex}
@@ -121,7 +139,7 @@ const Customers = () => {
                                 <div className="flex gap-2 text-brand-secondary mb-10 text-2xl">
                                     {[...Array(5)].map((_, i) => <FiStar key={i} className="fill-current" />)}
                                 </div>
-                                <p className="text-3xl md:text-5xl font-bold tracking-tight leading-snug mb-12 text-white">
+                                <p className="text-2xl md:text-5xl font-bold tracking-tight leading-snug mb-8 md:mb-12 text-white">
                                     "{testimonials[currentIndex]?.text}"
                                 </p>
                                 <div>

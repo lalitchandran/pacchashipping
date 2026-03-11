@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiLock, FiLogOut, FiMessageSquare, FiFileText, FiPlus, FiX, FiShield } from 'react-icons/fi';
+import { FiLock, FiLogOut, FiMessageSquare, FiFileText, FiPlus, FiX, FiShield, FiCheckCircle } from 'react-icons/fi';
 import { auth, db } from '../firebase/config';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { collection, query, orderBy, onSnapshot, addDoc, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
+import { ref, onValue, push, set, remove } from 'firebase/database';
 
 const Admin = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,34 +28,60 @@ const Admin = () => {
         let unsubscribe = () => { };
 
         if (activeTab === 'queries') {
-            const q = query(collection(db, 'queries'), orderBy('createdAt', 'desc'));
-            unsubscribe = onSnapshot(q, (snap) => {
-                setQueriesList(snap.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data(),
-                    date: doc.data().createdAt?.toDate()?.toLocaleDateString() || 'Recent'
-                })));
+            unsubscribe = onValue(ref(db, 'queries'), (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    let arr = Object.keys(data).map(key => ({
+                        id: key,
+                        ...data[key],
+                        date: data[key].createdAt ? new Date(data[key].createdAt).toLocaleDateString() : 'Recent'
+                    }));
+                    arr.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                    setQueriesList(arr);
+                } else {
+                    setQueriesList([]);
+                }
                 setLoading(false);
             }, (err) => { console.error(err); setLoading(false); });
         } else if (activeTab === 'news') {
-            const q = query(collection(db, 'news'), orderBy('createdAt', 'desc'));
-            unsubscribe = onSnapshot(q, (snap) => {
-                setNewsItems(snap.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data(),
-                    date: doc.data().createdAt?.toDate()?.toLocaleDateString() || 'Recent'
-                })));
+            unsubscribe = onValue(ref(db, 'news'), (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    let arr = Object.keys(data).map(key => ({
+                        id: key,
+                        ...data[key],
+                        date: data[key].createdAt ? new Date(data[key].createdAt).toLocaleDateString() : 'Recent'
+                    }));
+                    arr.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                    setNewsItems(arr);
+                } else {
+                    setNewsItems([]);
+                }
                 setLoading(false);
             }, (err) => { console.error(err); setLoading(false); });
         } else if (activeTab === 'ecosystem') {
             let loaded = 0;
             const checkDone = () => { loaded++; if (loaded >= 2) setLoading(false); };
-            const unsubPartners = onSnapshot(query(collection(db, 'partners'), orderBy('createdAt', 'desc')), (snap) => {
-                setPartners(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+            const unsubPartners = onValue(ref(db, 'partners'), (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    let arr = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+                    arr.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                    setPartners(arr);
+                } else {
+                    setPartners([]);
+                }
                 checkDone();
             }, (err) => { console.error(err); checkDone(); });
-            const unsubTestimonials = onSnapshot(query(collection(db, 'testimonials'), orderBy('createdAt', 'desc')), (snap) => {
-                setTestimonials(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+            const unsubTestimonials = onValue(ref(db, 'testimonials'), (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    let arr = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+                    arr.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                    setTestimonials(arr);
+                } else {
+                    setTestimonials([]);
+                }
                 checkDone();
             }, (err) => { console.error(err); checkDone(); });
             unsubscribe = () => { unsubPartners(); unsubTestimonials(); };
@@ -87,19 +113,20 @@ const Admin = () => {
     const handleAddNews = async (e) => {
         e.preventDefault();
         if (!auth.currentUser) {
-            alert("\u26A0\uFE0F Cannot add data to Firebase while using the dummy demo login. Please create a real user in Firebase Authentication and log in, OR update your Firestore security rules to allow unauthenticated writes.");
+            alert("\u26A0\uFE0F Cannot add data to Firebase while using the dummy demo login. Please create a real user in Firebase Authentication and log in, OR update your Firebase Security Rules.");
             return;
         }
         const newsData = { ...newNews };
         setIsAddingNews(false);
         setNewNews({ title: '', summary: '', type: 'Company News', imageUrl: '' });
         try {
-            await addDoc(collection(db, 'news'), {
+            const newRef = push(ref(db, 'news'));
+            await set(newRef, {
                 ...newsData,
-                createdAt: serverTimestamp()
+                createdAt: Date.now()
             });
         } catch (error) {
-            alert("Error adding news: " + error.message + "\n\n(Check your Firestore Security Rules)");
+            alert("Error adding news: " + error.message + "\n\n(Check your Firebase Security Rules)");
         }
     };
 
@@ -107,15 +134,16 @@ const Admin = () => {
         e.preventDefault();
         if (!newPartner.name.trim()) return;
         if (!auth.currentUser) {
-            alert("\u26A0\uFE0F Cannot add data: You are logged in with the demo fallback account. Please use a real Firebase Auth account to write to the database.");
+            alert("\u26A0\uFE0F Cannot add data: You are logged in with the demo fallback account.");
             return;
         }
         const partnerData = { ...newPartner };
         setNewPartner({ name: '', logoUrl: '' });
         try {
-            await addDoc(collection(db, 'partners'), { name: partnerData.name, logoUrl: partnerData.logoUrl || '', createdAt: serverTimestamp() });
+            const newRef = push(ref(db, 'partners'));
+            await set(newRef, { name: partnerData.name, logoUrl: partnerData.logoUrl || '', createdAt: Date.now() });
         } catch (error) {
-            alert("Error adding partner: " + error.message + "\n\n(Check your Firestore Security Rules)");
+            alert("Error adding partner: " + error.message + "\n\n(Check your Firebase Security Rules)");
         }
     };
 
@@ -123,28 +151,41 @@ const Admin = () => {
         e.preventDefault();
         if (!newTestimonial.text || !newTestimonial.author) return;
         if (!auth.currentUser) {
-            alert("\u26A0\uFE0F Cannot add data: You are logged in with the demo fallback account. Please use a real Firebase Auth account to write to the database.");
+            alert("\u26A0\uFE0F Cannot add data: You are logged in with the demo fallback account.");
             return;
         }
         const testimonialData = { ...newTestimonial };
         setNewTestimonial({ text: '', author: '', role: '' });
         try {
-            await addDoc(collection(db, 'testimonials'), { ...testimonialData, createdAt: serverTimestamp() });
+            const newRef = push(ref(db, 'testimonials'));
+            await set(newRef, { ...testimonialData, createdAt: Date.now() });
         } catch (error) {
-            alert("Error adding testimonial: " + error.message + "\n\n(Check your Firestore Security Rules)");
+            alert("Error adding testimonial: " + error.message + "\n\n(Check your Firebase Security Rules)");
         }
     };
 
     const handleDelete = async (collectionName, id) => {
-        if (!window.confirm(`Delete this item from ${collectionName}?`)) return;
+        if (!window.confirm("Delete this item from " + collectionName + "?")) return;
         if (!auth.currentUser) {
             alert("\u26A0\uFE0F Cannot delete data: You are logged in with the demo fallback account.");
             return;
         }
         try {
-            await deleteDoc(doc(db, collectionName, id));
+            await remove(ref(db, collectionName + "/" + id));
         } catch (error) {
-            alert("Error deleting item: " + error.message + "\n\n(Check your Firestore Security Rules)");
+            alert("Error deleting item: " + error.message + "\n\n(Check your Firebase Security Rules)");
+        }
+    };
+
+    const handleUpdateStatus = async (collectionName, id, newStatus) => {
+        if (!auth.currentUser) {
+            alert("\u26A0\uFE0F Cannot update data: You are logged in with the demo fallback account.");
+            return;
+        }
+        try {
+            await set(ref(db, collectionName + "/" + id + "/status"), newStatus);
+        } catch (error) {
+            alert("Error updating status: " + error.message);
         }
     };
 
@@ -315,10 +356,14 @@ const Admin = () => {
                                         <div className="flex-1">
                                             <div className="flex items-center justify-between mb-4">
                                                 <div className="flex items-center gap-3">
-                                                    <span className={`text-[10px] px-3 py-1.5 rounded-full font-bold uppercase tracking-widest ${q.status === 'New' ? 'bg-brand-primary/20 text-brand-secondary border border-brand-primary/30' : 'bg-white/5 text-muted-foreground'}`}>
+                                                    <span className={`text-[10px] px-3 py-1.5 rounded-full font-bold uppercase tracking-widest ${q.status === 'Completed' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-brand-primary/20 text-brand-secondary border border-brand-primary/30'}`}>
                                                         {q.status || 'New'}
                                                     </span>
                                                     <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest">{q.date}</span>
+                                                </div>
+                                                <div className="flex gap-2">
+                                                    <button onClick={() => handleUpdateStatus('queries', q.id, 'Completed')} className="text-green-500 hover:text-green-400 bg-green-500/10 p-2 rounded-full opacity-50 group-hover:opacity-100 transition-opacity"><FiCheckCircle size={18} /></button>
+                                                    <button onClick={() => handleDelete('queries', q.id)} className="text-red-500 hover:text-red-400 bg-red-500/10 p-2 rounded-full opacity-50 group-hover:opacity-100 transition-opacity"><FiX size={18} /></button>
                                                 </div>
                                             </div>
                                             <h4 className="font-extrabold text-2xl text-foreground mb-1">{q.name}</h4>
