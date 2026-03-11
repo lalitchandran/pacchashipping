@@ -321,23 +321,6 @@ const Admin = () => {
                     </div>
                 ) : activeTab === 'queries' ? (
                     <div className="flex flex-col gap-6">
-                        {/* Map Location Section */}
-                        <div className="glass-panel rounded-[1.5rem] border border-white/5 p-4 mb-4 overflow-hidden relative shadow-[0_12px_30px_rgba(0,0,0,0.3)]">
-                            <h4 className="font-extrabold text-xl text-foreground mb-4 px-2">Network Operations Map</h4>
-                            <div className="w-full h-[300px] rounded-2xl overflow-hidden bg-white/5">
-                                <iframe
-                                    title="Network Operations Location Map"
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m3!1d3885.645607062489!2d80.20815131482397!3d13.121603590757521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5264a2c5a0134f%3A0x6bbaaaa3c28271a3!2sKolathur%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1672589000000!5m2!1sen!2sin"
-                                    width="100%"
-                                    height="100%"
-                                    style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) contrast(100%)' }}
-                                    allowFullScreen=""
-                                    loading="lazy"
-                                    referrerPolicy="no-referrer-when-downgrade">
-                                </iframe>
-                            </div>
-                        </div>
-
                         {queriesList.length === 0 ? (
                             <div className="h-64 flex flex-col items-center justify-center text-muted-foreground font-medium border-2 border-dashed border-white/5 rounded-[2rem] bg-white/5 gap-4">
                                 <FiMessageSquare className="text-4xl opacity-50" />
