@@ -94,9 +94,9 @@ const Footer = () => {
             <div className="max-w-[1400px] mx-auto px-6 border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-sm font-medium text-gray-500 gap-4">
                 <p>© {new Date().getFullYear()} Paccha Universal Shipping Line Pvt Ltd. All rights reserved.</p>
                 <div className="flex gap-8">
-                    <Link to="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-                    <Link to="#" className="hover:text-white transition-colors">Terms of Service</Link>
-                    <Link to="#" className="hover:text-white transition-colors">Sitemap</Link>
+                    <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                    <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+                    <Link to="/sitemap" className="hover:text-white transition-colors">Sitemap</Link>
                 </div>
             </div>
         </footer>

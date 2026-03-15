@@ -17,6 +17,8 @@ const OceanFreight = lazy(() => import('./pages/services/OceanFreight'));
 const RoadFreight = lazy(() => import('./pages/services/RoadFreight'));
 const Warehousing = lazy(() => import('./pages/services/Warehousing'));
 const TermsAndConditions = lazy(() => import('./pages/TermsAndConditions'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const Sitemap = lazy(() => import('./pages/Sitemap'));
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/terms" element={<TermsAndConditions />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/sitemap" element={<Sitemap />} />
             </Routes>
           </Suspense>
         </main>
