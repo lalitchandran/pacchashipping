@@ -99,7 +99,7 @@ const Home = () => {
         <div className="w-full relative bg-transparent min-h-screen">
             <Helmet>
                 <title>Paccha Shipping | Best Export Import & Logistics Company in Chennai India</title>
-                <meta name="description" content="Paccha Universal Shipping Line — India's leading export import company in Chennai. Specialists in Ocean Freight, Air Freight, Customs Clearance, and Global Logistics. Partner with us for seamless international trade since 2009." />
+                <meta name="description" content="Paccha Universal Shipping Line — India's leading export import company in Chennai. Specialists in Ocean Freight, Air Freight, Customs Clearance, and Global Logistics. Partner with us for seamless international trade since 2016." />
                 <meta name="keywords" content="export import company Chennai, logistics solutions India, freight forwarding Chennai, international shipping India, customs clearance agent, sea freight Chennai, air cargo India, Paccha Shipping" />
                 <link rel="canonical" href="https://pacchashipping.in/" />
 
@@ -157,7 +157,7 @@ const Home = () => {
                         transition={{ duration: 0.8, delay: 0.05 }}
                         className="text-brand-highlight tracking-widest uppercase text-sm font-bold mb-6 block px-4 py-2 bg-brand-primary/10 rounded-full border border-brand-primary/30"
                     >
-                        Trusted Export & Import Partner Since 2009
+                        Trusted Export & Import Partner Since 2016
                     </motion.span>
                     <motion.h1
                         initial={{ y: 50, opacity: 0 }}
@@ -218,7 +218,7 @@ const Home = () => {
                                 Moving Trade.<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-highlight to-brand-primary">Connecting Worldwide.</span>
                             </h2>
                             <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                                Paccha Universal Shipping Line Private Limited is a full-service export-import and logistics company headquartered in Chennai, India. Since 2009, we have been facilitating seamless international trade for businesses of all sizes — from SMEs to large corporations.
+                                Paccha Universal Shipping Line Private Limited is a full-service export-import and logistics company headquartered in Chennai, India. Since 2016, we have been facilitating seamless international trade for businesses of all sizes — from SMEs to large corporations.
                             </p>
                             <p className="text-gray-400 text-lg leading-relaxed mb-10">
                                 We specialize in customs clearance, freight forwarding, cargo consolidation, door-to-door delivery, and complete supply chain management across 50+ countries worldwide.
