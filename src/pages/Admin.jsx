@@ -102,7 +102,6 @@ const Admin = () => {
     const [authLoading, setAuthLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [currentUserEmail, setCurrentUserEmail] = useState('');
-    const [isDemoMode, setIsDemoMode] = useState(false);
 
     // Form states
     const [email, setEmail] = useState('');
@@ -143,8 +142,7 @@ const Admin = () => {
             if (user) {
                 setIsAuthenticated(true);
                 setCurrentUserEmail(user.email || 'Admin');
-                setIsDemoMode(false);
-            } else if (!isDemoMode) {
+            } else {
                 setIsAuthenticated(false);
                 setCurrentUserEmail('');
             }
@@ -152,7 +150,7 @@ const Admin = () => {
         });
 
         return () => unsubscribe();
-    }, [isDemoMode]);
+    }, []);
 
     // Reset filters on tab switch
     useEffect(() => {
@@ -249,7 +247,6 @@ const Admin = () => {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             setIsAuthenticated(true);
             setCurrentUserEmail(userCredential.user.email || email);
-            setIsDemoMode(false);
             showToast('Signed in successfully.', 'success');
         } catch (error) {
             console.error('Login error:', error);
@@ -267,13 +264,6 @@ const Admin = () => {
         }
     };
 
-    const handleDemoLogin = () => {
-        setIsDemoMode(true);
-        setIsAuthenticated(true);
-        setCurrentUserEmail('demo.officer@sentronlogistics.com');
-        showToast('Entered demo preview mode (Read-only view).', 'info');
-    };
-
     const handleLogout = async () => {
         try {
             await signOut(auth);
@@ -281,7 +271,6 @@ const Admin = () => {
             console.error(error);
         }
         setIsAuthenticated(false);
-        setIsDemoMode(false);
         setCurrentUserEmail('');
         showToast('Signed out of admin portal.', 'info');
     };
@@ -289,8 +278,8 @@ const Admin = () => {
     // Firebase Mutation Handlers
     const handleAddNews = async (e) => {
         e.preventDefault();
-        if (isDemoMode || !auth.currentUser) {
-            showToast('Write operations require a live Firebase authenticated user.', 'warning');
+        if (!auth.currentUser) {
+            showToast('Write operations require a live authenticated user.', 'warning');
             return;
         }
         const newsData = { ...newNews };
@@ -311,8 +300,8 @@ const Admin = () => {
     const handleAddPartner = async (e) => {
         e.preventDefault();
         if (!newPartner.name.trim()) return;
-        if (isDemoMode || !auth.currentUser) {
-            showToast('Write operations require a live Firebase authenticated user.', 'warning');
+        if (!auth.currentUser) {
+            showToast('Write operations require a live authenticated user.', 'warning');
             return;
         }
         const partnerData = { ...newPartner };
@@ -333,8 +322,8 @@ const Admin = () => {
     const handleAddTestimonial = async (e) => {
         e.preventDefault();
         if (!newTestimonial.text || !newTestimonial.author) return;
-        if (isDemoMode || !auth.currentUser) {
-            showToast('Write operations require a live Firebase authenticated user.', 'warning');
+        if (!auth.currentUser) {
+            showToast('Write operations require a live authenticated user.', 'warning');
             return;
         }
         const testimonialData = { ...newTestimonial };
@@ -350,8 +339,8 @@ const Admin = () => {
 
     const handleDelete = async (collectionName, id) => {
         if (!window.confirm(`Are you sure you want to delete this record from ${collectionName}?`)) return;
-        if (isDemoMode || !auth.currentUser) {
-            showToast('Write operations require a live Firebase authenticated user.', 'warning');
+        if (!auth.currentUser) {
+            showToast('Write operations require a live authenticated user.', 'warning');
             return;
         }
         try {
@@ -363,8 +352,8 @@ const Admin = () => {
     };
 
     const handleUpdateStatus = async (collectionName, id, newStatus) => {
-        if (isDemoMode || !auth.currentUser) {
-            showToast('Write operations require a live Firebase authenticated user.', 'warning');
+        if (!auth.currentUser) {
+            showToast('Write operations require a live authenticated user.', 'warning');
             return;
         }
         try {
@@ -522,16 +511,9 @@ const Admin = () => {
                         </button>
                     </form>
 
-                    {/* Demo fallback */}
+                    {/* Footer note */}
                     <div className="mt-6 pt-6 border-t border-white/10 flex flex-col items-center">
-                        <button
-                            type="button"
-                            onClick={handleDemoLogin}
-                            className="text-xs font-medium text-slate-400 hover:text-white transition-colors underline underline-offset-4 cursor-pointer"
-                        >
-                            Preview dashboard in demo mode
-                        </button>
-                        <p className="text-[11px] text-slate-500 mt-2 text-center">
+                        <p className="text-[11px] text-slate-500 text-center">
                             Authorized personnel only. All access attempts are recorded.
                         </p>
                     </div>
@@ -569,24 +551,6 @@ const Admin = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            {/* Demo Banner */}
-            {isDemoMode && (
-                <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-4 text-xs sm:text-sm text-amber-200">
-                    <div className="flex items-center gap-2">
-                        <FiAlertCircle className="text-lg text-amber-400 shrink-0" />
-                        <span>
-                            <strong>Demo Preview Mode:</strong> You are browsing with read-only privileges. Direct database modifications require signing in with a registered Firebase user.
-                        </span>
-                    </div>
-                    <button
-                        onClick={handleLogout}
-                        className="px-3 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-100 font-semibold shrink-0 cursor-pointer"
-                    >
-                        Switch to Live Auth
-                    </button>
-                </div>
-            )}
 
             {/* Mobile Tab Navigation Bar (Swipeable / Scrollable) */}
             <div className="lg:hidden mb-6 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-white/10">
@@ -888,8 +852,8 @@ const Admin = () => {
                                                     </div>
                                                     <div className="flex items-center justify-between py-2 border-b border-white/5">
                                                         <span className="text-slate-400">Authentication</span>
-                                                        <span className={`px-2 py-0.5 rounded-md font-semibold ${isDemoMode ? 'bg-amber-500/15 text-amber-300' : 'bg-emerald-500/15 text-emerald-400'}`}>
-                                                            {isDemoMode ? 'Demo Read-Only' : 'Active (Firebase)'}
+                                                        <span className="px-2 py-0.5 rounded-md font-semibold bg-emerald-500/15 text-emerald-400">
+                                                            Active (Firebase Auth)
                                                         </span>
                                                     </div>
                                                     <div className="flex items-center justify-between py-2 border-b border-white/5">
