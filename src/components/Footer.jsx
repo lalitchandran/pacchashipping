@@ -1,102 +1,105 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiPhone, FiMail, FiMapPin, FiLinkedin, FiFacebook, FiInstagram, FiTwitter } from 'react-icons/fi';
+import { FiPhone, FiMail, FiMapPin, FiLinkedin, FiFacebook, FiTwitter, FiShield, FiCheck } from 'react-icons/fi';
+import SentronLogo from './SentronLogo';
 
 const Footer = () => {
     return (
-        <footer className="relative mt-20 pt-20 pb-10 bg-[#050a07] border-t border-brand-primary/30 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] z-20">
-            <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <footer className="relative mt-16 sm:mt-20 pt-12 sm:pt-16 pb-10 sm:pb-12 bg-[#050D1A] border-t border-white/10 z-20 text-left">
+            <div className="hallmark-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
 
                 {/* Brand Info */}
                 <div className="col-span-1 md:col-span-1">
-                    <Link to="/" className="flex items-center gap-3 mb-6 group">
-                        <div className="w-5 h-5 rounded-full bg-red-600 shadow-[0_0_20px_rgba(220,38,38,0.6)] group-hover:scale-125 transition-transform" />
-                        <div>
-                            <span className="font-bold text-2xl tracking-tighter text-white block">PACCHA</span>
-                            <span className="text-xs text-gray-500 tracking-wider">Universal Shipping Line</span>
-                        </div>
+                    <Link to="/" className="inline-block mb-4">
+                        <SentronLogo size="md" />
                     </Link>
-                    <p className="text-gray-400 text-[15px] mb-4 max-w-xs leading-relaxed font-medium">
-                        Paccha Universal Shipping Line Pvt. Ltd. — Your trusted export-import and freight forwarding partner since 2016. Chennai, India.
+                    <p className="text-gray-400 text-sm mb-5 leading-relaxed font-normal">
+                        Enterprise freight forwarding, customs brokerage, and multimodal supply chains across 65+ countries.
                     </p>
-                    <p className="text-gray-500 text-xs mb-6">IEC Holder · Custom License Holder · DGFT Registered</p>
-                    <div className="flex gap-4">
-                        <a href="#" aria-label="Facebook" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-primary transition-colors duration-300">
-                            <FiFacebook />
-                        </a>
-                        <a href="#" aria-label="Instagram" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-primary transition-colors duration-300">
-                            <FiInstagram />
-                        </a>
-                        <a href="#" aria-label="LinkedIn" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-primary transition-colors duration-300">
+
+                    <div className="flex flex-col gap-2 mb-6 text-xs text-gray-300">
+                        <span className="flex items-center gap-1.5">
+                            <FiCheck className="text-brand-orange" /> Licensed Customs Broker (CHA)
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                            <FiShield className="text-brand-orange" /> AEO-T2 and IATA Accredited
+                        </span>
+                    </div>
+
+                    <div className="flex gap-2.5">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
                             <FiLinkedin />
                         </a>
-                        <a href="#" aria-label="Twitter" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-primary transition-colors duration-300">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
                             <FiTwitter />
+                        </a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
+                            <FiFacebook />
                         </a>
                     </div>
                 </div>
 
-                {/* Quick Links */}
+                {/* Navigation Links */}
                 <div>
-                    <h4 className="font-bold text-lg mb-6 text-white">Quick Links</h4>
-                    <ul className="flex flex-col gap-4 text-[15px] text-gray-400 font-medium">
+                    <h4 className="font-semibold text-sm mb-4 text-white">
+                        Navigation
+                    </h4>
+                    <ul className="flex flex-col gap-2.5 text-sm text-gray-400">
                         <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
-                        <li><Link to="/services" className="hover:text-white transition-colors">Our Services</Link></li>
-                        <li><Link to="/updates" className="hover:text-white transition-colors">Trade News</Link></li>
-                        <li><Link to="/customers" className="hover:text-white transition-colors">Our Clients</Link></li>
-                        <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
-                        <li><Link to="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link></li>
+                        <li><Link to="/services" className="hover:text-white transition-colors">Freight services</Link></li>
+                        <li><Link to="/updates" className="hover:text-white transition-colors">Trade updates</Link></li>
+                        <li><Link to="/customers" className="hover:text-white transition-colors">Clients and reviews</Link></li>
+                        <li><Link to="/contact" className="hover:text-white transition-colors">Contact desk</Link></li>
                     </ul>
                 </div>
 
                 {/* Services */}
                 <div>
-                    <h4 className="font-bold text-lg mb-6 text-white">Our Services</h4>
-                    <ul className="flex flex-col gap-4 text-[15px] text-gray-400 font-medium">
-                        <li><Link to="/services/ocean" className="hover:text-white transition-colors">Ocean & Sea Freight (FCL/LCL)</Link></li>
-                        <li><Link to="/services/air" className="hover:text-white transition-colors">Air Freight Export & Import</Link></li>
-                        <li><Link to="/services/road" className="hover:text-white transition-colors">Road & Inland Transport</Link></li>
-                        <li><Link to="/services/warehousing" className="hover:text-white transition-colors">Warehousing & Distribution</Link></li>
-                        <li><Link to="/services" className="hover:text-white transition-colors">Customs Clearance</Link></li>
-                        <li><Link to="/services" className="hover:text-white transition-colors">Cargo Insurance</Link></li>
+                    <h4 className="font-semibold text-sm mb-4 text-white">
+                        Freight solutions
+                    </h4>
+                    <ul className="flex flex-col gap-2.5 text-sm text-gray-400">
+                        <li><Link to="/services/ocean" className="hover:text-white transition-colors">Ocean freight (FCL / LCL)</Link></li>
+                        <li><Link to="/services/air" className="hover:text-white transition-colors">Air cargo express</Link></li>
+                        <li><Link to="/services/road" className="hover:text-white transition-colors">Intermodal road haulage</Link></li>
+                        <li><Link to="/services/warehousing" className="hover:text-white transition-colors">Warehousing and distribution</Link></li>
+                        <li><Link to="/services" className="hover:text-white transition-colors">Customs clearance (CHA)</Link></li>
+                        <li><Link to="/services" className="hover:text-white transition-colors">Project cargo logistics</Link></li>
                     </ul>
                 </div>
 
-                {/* Contact info */}
+                {/* Direct Contact info */}
                 <div>
-                    <h4 className="font-bold text-lg mb-6 text-white">Contact</h4>
-                    <ul className="flex flex-col gap-6 text-[15px] text-gray-400 font-medium">
-                        <li className="flex gap-4 items-start">
-                            <div className="mt-1 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-brand-highlight shrink-0">
-                                <FiMapPin />
-                            </div>
-                            <span>No.16, Dhanalakshmi Nagar, Kadappa Road, Puthagaram, Kolathur, Chennai - 600 099.</span>
+                    <h4 className="font-semibold text-sm mb-4 text-white">
+                        Commercial office
+                    </h4>
+                    <ul className="flex flex-col gap-3.5 text-sm text-gray-400">
+                        <li className="flex gap-2.5 items-start">
+                            <FiMapPin className="text-brand-orange mt-1 shrink-0" />
+                            <span>No.16, Dhanalakshmi Nagar, Kadappa Road, Puthagaram, Kolathur, Chennai - 600 099, India</span>
                         </li>
-                        <li className="flex gap-4 items-center">
-                            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-brand-highlight shrink-0">
-                                <FiPhone />
-                            </div>
+                        <li className="flex gap-2.5 items-center">
+                            <FiPhone className="text-brand-orange shrink-0" />
                             <div>
-                                <a href="tel:+919841393916" className="block hover:text-white transition-colors">+91 98413 93916</a>
-                                <a href="tel:+919345021647" className="block hover:text-white transition-colors">+91 93450 21647</a>
+                                <a href="tel:+919841393916" className="hover:text-white transition-colors block">+91 98413 93916</a>
+                                <a href="tel:+919345021647" className="hover:text-white transition-colors text-xs text-gray-500 block">+91 93450 21647</a>
                             </div>
                         </li>
-                        <li className="flex gap-4 items-center">
-                            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-brand-highlight shrink-0">
-                                <FiMail />
-                            </div>
-                            <a href="mailto:admin@pacchashipping.in" className="hover:text-white transition-colors">admin@pacchashipping.in</a>
+                        <li className="flex gap-2.5 items-center">
+                            <FiMail className="text-brand-orange shrink-0" />
+                            <a href="mailto:sales@sentronglobal.com" className="hover:text-white transition-colors">sales@sentronglobal.com</a>
                         </li>
                     </ul>
                 </div>
+
             </div>
 
-            <div className="max-w-[1400px] mx-auto px-6 border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-sm font-medium text-gray-500 gap-4">
-                <p>© {new Date().getFullYear()} Paccha Universal Shipping Line Pvt Ltd. All rights reserved.</p>
-                <div className="flex gap-8">
-                    <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                    <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-                    <Link to="/sitemap" className="hover:text-white transition-colors">Sitemap</Link>
+            <div className="hallmark-container pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+                <p>© {new Date().getFullYear()} Sentron Global Logistics. All rights reserved.</p>
+                <div className="flex gap-6">
+                    <Link to="/privacy" className="hover:text-gray-300 transition-colors">Privacy policy</Link>
+                    <Link to="/terms" className="hover:text-gray-300 transition-colors">Terms of trading</Link>
+                    <Link to="/sitemap-page" className="hover:text-gray-300 transition-colors">Sitemap</Link>
                 </div>
             </div>
         </footer>

@@ -1,0 +1,44 @@
+# Sentron Global Logistics (SGL) — Comprehensive Technical & Service Specifications
+
+## 1. Executive Summary & Corporate Governance
+Sentron Global Logistics (operating as SGL) is an accredited international freight forwarder and licensed Customs House Broker (CHA) based in Chennai, India, operating global corridors across 65+ countries.
+- **Accreditations**: Licensed Custom House Agent (Government of India, Ministry of Finance), IATA Cargo Agent, AEO-T2 (Authorized Economic Operator) Certified, ISO 9001:2015.
+- **Operational Scope**: Ocean Freight (FCL/LCL), International Air Cargo, Intermodal Road Haulage, Bonded Warehousing, Project Cargo, Cold-Chain Logistics, Tariff Optimization, and All-Risk Marine Insurance.
+
+## 2. Ocean Freight Capabilities
+### 2.1 Equipment Types Handled
+- **20ft Dry Van (20GP)**: 33.2 CBM capacity, payload up to 28,180 kg.
+- **40ft Dry Van (40GP)**: 67.7 CBM capacity, payload up to 28,750 kg.
+- **40ft High Cube (40HC)**: 76.3 CBM capacity, payload up to 28,600 kg.
+- **Reefer Containers (20RF / 40HR)**: Controlled atmosphere from -35°C to +30°C.
+- **Special Equipment**: Flat Racks, Open Tops, ISO Tanks for liquid bulk chemicals.
+### 2.2 Trade Lanes & Schedules
+- Chennai / JNPT <-> Dubai / Jebel Ali (UAE): 10-14 days transit, 3x weekly sailings.
+- Chennai / JNPT <-> Singapore (PSA): 7-10 days transit, daily direct feeder connection.
+- Chennai / JNPT <-> Rotterdam / Hamburg (Europe): 22-26 days transit, weekly direct sailings.
+- Chennai / JNPT <-> New York / Los Angeles (USA): 28-34 days transit, 2x weekly sailings.
+
+## 3. Air Cargo Express Capabilities
+- **Charter Aviation**: Full and part charter solutions for outsized project equipment and critical components.
+- **Priority Air Freight**: Next-flight-out departures for time-critical electronics, automotive spares (AOG), and samples.
+- **Cold-Chain Pharma Logistics**: Passive and active packaging (Credo, Envirotainer), +2°C to +8°C and -20°C monitored transport compliant with GDP (Good Distribution Practice).
+
+## 4. Licensed Customs House Agent (CHA) Desk
+- Direct electronic filing with ICEGATE (Indian Customs EDI System).
+- 96% pre-arrival clearance rate minimizing port dwell and demurrage costs.
+- Advance tariff classification and HS Code advisory under WCO rules.
+- Export Promotion Capital Goods (EPCG), Advance Authorization, and Duty Drawback management.
+
+## 5. Incoterms Supported
+Sentron executes consignments across all ICC Incoterms 2020:
+- **EXW (Ex Works)**: Factory pickup, export clearance, carriage, import clearance, door delivery.
+- **FCA / FOB**: Origin cartage, port handling, export clearance, ocean/air freight booking.
+- **CFR / CIF**: Ocean/air carriage with or without marine cargo insurance.
+- **DAP / DDP**: Complete door-to-door execution including destination duty/tax clearance.
+
+## 6. Commercial Desk & SLA
+- **Guaranteed Rate Quotation Turnaround**: 18 minutes for standard trade lanes.
+- **Telephone Desk**: +91 98413 93916 / +91 93450 21647
+- **Commercial Email**: sales@sentronglobal.com
+- **Headquarters Address**: No.16, Dhanalakshmi Nagar, Kadappa Road, Puthagaram, Kolathur, Chennai - 600 099, Tamil Nadu, India.
+

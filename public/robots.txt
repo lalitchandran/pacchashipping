@@ -1,8 +1,55 @@
+# Sentron Global Logistics (SGL) — Official Robots Configuration
+# Canonical domain: https://sentronglobal.com
+
 User-agent: *
 Allow: /
-
-Sitemap: https://pacchashipping.in/sitemap.xml
-
-# Block admin panel from search indexing
-User-agent: *
 Disallow: /admin
+Disallow: /api/private
+
+# Agent Engine Optimization (AEO) — LLM Crawlers & Semantic Search Engines
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /admin
+
+User-agent: Bytespider
+Allow: /
+Disallow: /admin
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin
+
+# Agent Entry Point (llms.txt standard)
+# LLMs-Text: https://sentronglobal.com/llms.txt
+# LLMs-Full: https://sentronglobal.com/llms-full.txt
+
+# Canonical XML Sitemap
+Sitemap: https://sentronglobal.com/sitemap.xml

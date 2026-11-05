@@ -9,23 +9,23 @@ import { Helmet } from 'react-helmet-async';
 gsap.registerPlugin(ScrollTrigger);
 
 const features = [
-    "Express & Standard Air Cargo",
-    "Door-to-Door Air Delivery",
-    "Air Waybill (AWB) Processing",
-    "Priority & Charter Flights",
-    "Dangerous Goods (DG) by Air",
-    "Temperature-Controlled Cargo",
-    "Customs Clearance at Airport",
-    "IATA-Compliant Packing & Labelling",
+    "Express & Scheduled Air Cargo",
+    "Global Door-to-Door Aviation Delivery",
+    "Electronic Air Waybill (e-AWB) Processing",
+    "Priority Next-Flight-Out & Charter Space",
+    "Dangerous Goods (DG/IATA) by Air",
+    "Temperature-Controlled Pharma Logistics",
+    "On-Airport Customs Brokerage Clearance",
+    "IATA-Compliant Packing & Screening",
 ];
 
 const procesSteps = [
-    { step: '01', title: 'Booking & Rate Confirmation', desc: 'We provide competitive freight rates and confirm space with airline partners for your cargo.' },
-    { step: '02', title: 'Pickup & Packing Check', desc: 'Our team picks up the cargo and ensures it meets IATA packing and labelling requirements.' },
-    { step: '03', title: 'Export Documentation', desc: 'We prepare the Air Waybill, commercial invoice, packing list, and all required export declarations.' },
-    { step: '04', title: 'Loading & Departure', desc: 'Cargo is loaded on the flight. We provide you the AWB number for real-time tracking.' },
-    { step: '05', title: 'Import Customs Clearance', desc: 'Our destination agents handle import customs clearance at the destination airport.' },
-    { step: '06', title: 'Delivery to Consignee', desc: 'Final delivery is made to the consignee\'s door with proof of delivery.' },
+    { step: '01', title: 'Booking & Flight Space Guarantee', desc: 'Direct confirmed space with Tier-1 airlines and immediate rate locking.' },
+    { step: '02', title: 'Secure Terminal Gate & X-Ray Check', desc: 'Compliant cargo reception, weight verification, and IATA security scanning.' },
+    { step: '03', title: 'Export Customs Pre-Clearance', desc: 'Electronic filing of shipping bills, e-AWB, and export approvals before aircraft loading.' },
+    { step: '04', title: 'Flight Transit with Real-Time EDI', desc: 'Direct flight departure with real-time waypoint milestones and altitude updates.' },
+    { step: '05', title: 'Destination Airport Clearance', desc: 'Local partner customs house clearance and de-consolidation without demurrage.' },
+    { step: '06', title: 'Final Doorstep Handover', desc: 'GPS-monitored final delivery with digital signed Proof of Delivery (e-POD).' },
 ];
 
 const AirFreight = () => {
@@ -33,9 +33,9 @@ const AirFreight = () => {
 
     useEffect(() => {
         gsap.to(planeRef.current, {
-            scale: 1.15,
-            y: 30,
-            x: 10,
+            scale: 1.12,
+            y: 20,
+            x: 8,
             scrollTrigger: {
                 trigger: ".air-hero",
                 start: "top top",
@@ -46,59 +46,51 @@ const AirFreight = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#050a07] pt-32 pb-20 overflow-hidden relative">
+        <main className="min-h-screen bg-[#061325] pt-28 pb-16 sm:pt-32 sm:pb-20 overflow-hidden relative text-left">
             <Helmet>
-                <title>Air Freight &amp; Cargo Services | Fast Global Shipping Chennai India</title>
-                <meta name="description" content="Express air freight and cargo solutions from Chennai airport. Time-critical worldwide delivery to 100+ countries, IATA-compliant handling, and customs clearance. Get a free air freight quote." />
-                <meta name="keywords" content="air freight Chennai, air cargo India, express air shipping Chennai, export air cargo India, air freight forwarder Tamil Nadu, international air cargo Chennai airport" />
-                <link rel="canonical" href="https://pacchashipping.in/services/air" />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://pacchashipping.in/services/air" />
-                <meta property="og:title" content="Air Freight from Chennai | Fast Global Air Cargo | Paccha Shipping" />
-                <meta property="og:description" content="Fast, IATA-compliant air cargo to 100+ global destinations from Chennai. Door-to-door, customs clearance, DG handling." />
-                <meta property="og:image" content="https://pacchashipping.in/paccha_air_freight.png" />
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Air Freight from Chennai | Paccha Shipping" />
-                <meta name="twitter:description" content="Fast air cargo from Chennai to 100+ destinations. IATA-compliant, customs cleared, door-to-door." />
-                <meta name="twitter:image" content="https://pacchashipping.in/paccha_air_freight.png" />
-                <script type="application/ld+json">{`{"@context":"https://schema.org","@type":"Service","name":"Air Freight Export and Import","serviceType":"Air Cargo","provider":{"@type":"LocalBusiness","name":"Paccha Universal Shipping Line Pvt Ltd","url":"https://pacchashipping.in","telephone":"+91-98413-93916","address":{"@type":"PostalAddress","addressLocality":"Chennai","addressRegion":"Tamil Nadu","postalCode":"600099","addressCountry":"IN"}},"areaServed":["India","United Arab Emirates","Singapore","United Kingdom","United States","Germany"],"description":"IATA-compliant air freight and express cargo services from Chennai International Airport to 100+ global destinations."}`}</script>
-                <script type="application/ld+json">{`{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How long does air freight from Chennai take?","acceptedAnswer":{"@type":"Answer","text":"Chennai to Dubai is 1-2 days, Chennai to Europe is 2-3 days, Chennai to USA is 3-5 days."}},{"@type":"Question","name":"Can Paccha Shipping handle dangerous goods by air?","acceptedAnswer":{"@type":"Answer","text":"Yes, our team is trained in IATA Dangerous Goods Regulations and can handle DG cargo by air with proper documentation."}},{"@type":"Question","name":"What documents are needed for air freight export from India?","acceptedAnswer":{"@type":"Answer","text":"Key documents include the Air Waybill (AWB), Commercial Invoice, Packing List, Shipping Bill, IEC, and any commodity-specific permits."}},{"@type":"Question","name":"Does Paccha Shipping offer door-to-door air freight service?","acceptedAnswer":{"@type":"Answer","text":"Yes, we offer complete door-to-door air freight including factory pickup, export customs, airline booking, import clearance, and last-mile delivery."}}]}`}</script>
+                <title>Air Cargo Express & Priority | Sentron Global Logistics</title>
+                <meta name="description" content="Time-critical international air cargo services connecting 100+ global airport hubs. IATA-compliant handling, temperature-controlled pharma flights, and express customs clearance." />
+                <meta name="keywords" content="air freight services, express air cargo, air shipping international, IATA cargo agent, Sentron Global Logistics" />
+                <link rel="canonical" href="https://sentronglobal.com/services/air" />
             </Helmet>
-            <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/10 via-transparent to-transparent pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-accent/15 via-transparent to-transparent pointer-events-none"></div>
 
             {/* Hero */}
-            <section className="air-hero relative max-w-7xl mx-auto px-6 mb-32 z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
-                        <span className="text-brand-highlight tracking-widest uppercase text-sm font-bold mb-4 block">Air Freight Services</span>
-                        <h1 className="text-5xl md:text-7xl font-heading font-extrabold pb-4 text-white drop-shadow-lg">
-                            Fast Air Cargo.<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-highlight to-brand-primary">Worldwide.</span>
+            <section className="air-hero relative hallmark-container mb-20 z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 items-center">
+                    <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+                        <span className="text-xs sm:text-sm font-semibold text-brand-orange mb-2 block">
+                            Time-critical aviation logistics
+                        </span>
+                        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black pb-3 text-white tracking-tight leading-tight">
+                            Priority air cargo. Worldwide precision.
                         </h1>
-                        <p className="text-xl text-gray-300 max-w-lg mb-8 font-light leading-relaxed">
-                            Time-critical shipments demand speed and precision. Paccha Universal Shipping Line connects your cargo to 100+ global destinations via leading airlines — from small parcels to oversized freight.
+                        <p className="text-base sm:text-lg text-gray-300 max-w-lg mb-8 font-normal leading-relaxed">
+                            When delivery timelines cannot be compromised. Sentron Global Logistics moves mission-critical freight across 100+ global air destinations with next-flight-out prioritization and guaranteed tarmac speed.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <Link to="/contact" className="px-8 py-4 rounded-full bg-brand-primary text-white hover:bg-brand-highlight transition-all font-bold text-lg inline-flex items-center gap-2 hover:-translate-y-1">
-                                Get Air Freight Quote <FiArrowRight />
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                            <Link to="/contact" className="btn-primary w-full sm:w-auto">
+                                <span>Get air freight quote</span>
+                                <FiArrowRight className="text-base" />
                             </Link>
-                            <a href="tel:+919841393916" className="px-8 py-4 rounded-full border border-white/20 text-white hover:border-brand-primary/60 transition-all font-bold text-lg inline-flex items-center gap-2 hover:-translate-y-1">
-                                Call: +91 98413 93916
+                            <a href="tel:+919841393916" className="btn-secondary w-full sm:w-auto flex items-center justify-center gap-2">
+                                <FiClock className="text-brand-orange" />
+                                <span>Call air desk: +91 98413 93916</span>
                             </a>
                         </div>
                     </motion.div>
 
-                    <div className="relative h-[400px] md:h-[500px] w-full mt-12 lg:mt-0">
-                        <div className="absolute inset-0 overflow-hidden rounded-3xl glass-panel-dark border border-brand-highlight/30 shadow-[0_0_40px_rgba(99,102,241,0.2)]">
+                    <div className="relative h-[380px] md:h-[480px] w-full mt-10 lg:mt-0">
+                        <div className="absolute inset-0 overflow-hidden rounded-3xl glass-panel-dark border border-brand-accent/30 shadow-2xl">
                             <div
                                 ref={planeRef}
                                 className="w-full h-full bg-cover bg-center origin-center"
-                                style={{ backgroundImage: "url('/paccha_air_freight.png')" }}
+                                style={{ backgroundImage: "url('/sentron_air_freight.png')" }}
                             ></div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#050a07] via-transparent to-transparent opacity-80"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#061325] via-transparent to-transparent opacity-85"></div>
                             <div className="absolute bottom-6 left-6 flex items-center gap-3">
-                                <div className="w-3 h-3 rounded-full bg-brand-highlight animate-pulse shadow-neon-brand"></div>
-                                <span className="text-white font-bold text-sm tracking-widest uppercase">Tracking: AWB 176-55823041</span>
+                                <div className="w-3 h-3 rounded-full bg-brand-orange animate-ping shadow-neon-orange"></div>
+                                <span className="text-white font-bold text-xs tracking-widest uppercase">Air Consignment Corridor: SG-AWB-902</span>
                             </div>
                         </div>
                     </div>
@@ -107,42 +99,42 @@ const AirFreight = () => {
 
             {/* Features */}
             <section className="max-w-7xl mx-auto px-6 relative z-10 mb-24">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                     <div>
-                        <h2 className="text-3xl font-heading font-bold mb-4 text-white">What's Included in Our Air Freight Service</h2>
-                        <p className="text-gray-400 mb-8 leading-relaxed text-lg">
-                            We handle every aspect of your air cargo — from pickup and packing verification at your factory to customs clearance and delivery at the destination. Our IATA-certified team ensures your shipment is always compliant, safe, and on time.
+                        <h2 className="text-3xl md:text-4xl font-black mb-4 text-white">Full-Scope Aviation Capabilities</h2>
+                        <p className="text-gray-300 mb-8 leading-relaxed text-base font-normal">
+                            From factory-floor pickup to final customs gate-out at destination airports, our IATA-certified air freight specialists manage all documentation, cold-chain monitoring, and security verification.
                         </p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                             {features.map((feature, idx) => (
-                                <div key={idx} className="flex items-center gap-3 text-gray-300 p-3 bg-white/5 rounded-xl border border-white/5">
-                                    <FiCheckCircle className="text-brand-primary text-xl shrink-0" />
-                                    <span className="text-sm font-medium">{feature}</span>
+                                <div key={idx} className="flex items-center gap-3 text-gray-200 p-3 bg-[#07172C]/80 rounded-xl border border-brand-accent/20">
+                                    <FiCheckCircle className="text-brand-orange text-lg shrink-0" />
+                                    <span className="text-xs md:text-sm font-semibold">{feature}</span>
                                 </div>
                             ))}
                         </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="glass-panel p-6 flex flex-col justify-center items-center text-center rounded-2xl">
-                            <FiClock className="text-brand-highlight text-4xl mb-3" />
-                            <span className="text-4xl font-heading font-bold text-brand-highlight mb-2">24/7</span>
-                            <span className="text-gray-400 text-sm font-medium uppercase tracking-wider">Operations Support</span>
+                        <div className="glass-panel-dark p-6 flex flex-col justify-center items-center text-center rounded-2xl border border-brand-accent/20">
+                            <FiClock className="text-brand-orange text-3xl mb-2" />
+                            <span className="text-3xl font-black text-white mb-1">24/7</span>
+                            <span className="text-gray-400 text-xs font-bold uppercase tracking-wider">Flight Desk Support</span>
                         </div>
-                        <div className="glass-panel p-6 flex flex-col justify-center items-center text-center rounded-2xl">
-                            <FiGlobe className="text-brand-primary text-4xl mb-3" />
-                            <span className="text-4xl font-heading font-bold text-brand-primary mb-2">100+</span>
-                            <span className="text-gray-400 text-sm font-medium uppercase tracking-wider">Destinations</span>
+                        <div className="glass-panel-dark p-6 flex flex-col justify-center items-center text-center rounded-2xl border border-brand-accent/20">
+                            <FiGlobe className="text-brand-highlight text-3xl mb-2" />
+                            <span className="text-3xl font-black text-white mb-1">100+</span>
+                            <span className="text-gray-400 text-xs font-bold uppercase tracking-wider">Airport Gateways</span>
                         </div>
-                        <div className="glass-panel p-6 flex flex-col justify-center items-center text-center rounded-2xl">
-                            <FiShield className="text-brand-highlight text-4xl mb-3" />
-                            <span className="text-3xl font-heading font-bold text-brand-highlight mb-2">IATA</span>
-                            <span className="text-gray-400 text-sm font-medium uppercase tracking-wider">Compliant Handling</span>
+                        <div className="glass-panel-dark p-6 flex flex-col justify-center items-center text-center rounded-2xl border border-brand-accent/20">
+                            <FiShield className="text-brand-orange text-3xl mb-2" />
+                            <span className="text-2xl font-black text-white mb-1">IATA</span>
+                            <span className="text-gray-400 text-xs font-bold uppercase tracking-wider">Accredited Agent</span>
                         </div>
-                        <div className="glass-panel p-6 flex flex-col justify-center items-center text-center rounded-2xl">
-                            <FiPackage className="text-brand-primary text-4xl mb-3" />
-                            <span className="text-3xl font-heading font-bold text-brand-primary mb-2">DG</span>
-                            <span className="text-gray-400 text-sm font-medium uppercase tracking-wider">Dangerous Goods Approved</span>
+                        <div className="glass-panel-dark p-6 flex flex-col justify-center items-center text-center rounded-2xl border border-brand-accent/20">
+                            <FiPackage className="text-brand-highlight text-3xl mb-2" />
+                            <span className="text-2xl font-black text-white mb-1">IMO/DG</span>
+                            <span className="text-gray-400 text-xs font-bold uppercase tracking-wider">Dangerous Goods Approved</span>
                         </div>
                     </div>
                 </div>
@@ -150,20 +142,20 @@ const AirFreight = () => {
 
             {/* Process */}
             <section className="max-w-7xl mx-auto px-6 relative z-10 mb-24">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">How Our Air Freight Process Works</h2>
+                <h2 className="text-3xl md:text-5xl font-black text-white mb-12 text-center">Air Freight Execution Protocol</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {procesSteps.map(({ step, title, desc }) => (
                         <motion.div
                             key={step}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="glass-panel-dark rounded-2xl p-6 border border-white/5 hover:border-brand-primary/30 transition-all"
+                            transition={{ duration: 0.5 }}
+                            className="glass-panel-dark rounded-2xl p-6 border border-brand-accent/20 hover:border-brand-highlight/40 transition-all"
                         >
-                            <span className="text-4xl font-black text-brand-primary/40 block mb-3">{step}</span>
-                            <h3 className="text-lg font-bold text-white mb-2">{title}</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed">{desc}</p>
+                            <span className="text-3xl font-black text-brand-orange/60 block mb-2">{step}</span>
+                            <h3 className="text-base font-bold text-white mb-2">{title}</h3>
+                            <p className="text-gray-300 text-xs leading-relaxed">{desc}</p>
                         </motion.div>
                     ))}
                 </div>
@@ -171,16 +163,17 @@ const AirFreight = () => {
 
             {/* CTA */}
             <section className="max-w-7xl mx-auto px-6 relative z-10">
-                <div className="bg-gradient-to-br from-brand-primary/20 to-black/40 border border-brand-primary/30 rounded-[2rem] p-12 text-center">
-                    <h3 className="text-3xl md:text-4xl font-black text-white mb-4">Ready to Ship by Air?</h3>
-                    <p className="text-gray-300 text-lg mb-8 max-w-xl mx-auto">Get a competitive air freight quote today. Our team will respond within a few hours with rates and transit times.</p>
-                    <Link to="/contact" className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-highlight text-white font-bold px-10 py-4 rounded-full transition-all hover:-translate-y-1">
-                        Request a Free Quote <FiArrowRight />
+                <div className="bg-gradient-to-br from-[#0B2545] via-[#07172C] to-[#050D1A] border border-brand-accent/30 rounded-[2.5rem] p-12 text-center shadow-2xl">
+                    <h3 className="text-3xl md:text-4xl font-black text-white mb-4">Book Your Urgent Air Consignment</h3>
+                    <p className="text-gray-300 text-base mb-8 max-w-xl mx-auto">Lock in airline space and receive verified departure schedules within 18 minutes.</p>
+                    <Link to="/contact" className="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orangeHover text-white font-bold px-10 py-4 rounded-full transition-all shadow-neon-orange hover:-translate-y-1">
+                        Request Air Cargo Quote <FiArrowRight />
                     </Link>
                 </div>
             </section>
-        </div>
+        </main>
     );
 };
 
 export default AirFreight;
+
